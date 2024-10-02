@@ -1,0 +1,29 @@
+{
+  "name": "backend-beutysalon",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node bin/www.ts",
+    "dev": "nodemon bin/www.ts",
+    "test": "run test"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.7.4",
+    "eslint": "^9.11.1",
+    "globals": "^15.10.0",
+    "typescript-eslint": "^8.8.0"
+  }
+}
