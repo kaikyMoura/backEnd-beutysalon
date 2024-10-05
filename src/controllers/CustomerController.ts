@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CustomerService from "../services/CustomerService";
+import { twilioMessageSender } from '../api/services/twilioMessageService';
 
 class CustomerController {
 
