@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import CustomerService from "../services/CustomerService";
+import appointmentService from '../services/AppointmentService'
 
-class CustomerController {
+class AppointmentController {
 
-    async findAllCustomers(req: Request, res: Response): Promise<Response> {
+    async findAllAppointments(req: Request, res: Response): Promise<Response> {
         try {
-            const data = await CustomerService.findAllCustomers()
+            const data = await appointmentService.findAllAppointments()
             if (data.length == 0) {
                 return res.status(404).json({
                     statusCode: 404,
-                    message: "Nenhum cliente encontrado",
+                    message: "Nenhum horário encontrado",
                 });
             }
             return res.status(200).json({
@@ -25,7 +25,7 @@ class CustomerController {
         }
     }
 
-    async createCustomer(req: Request, res: Response): Promise<Response> {
+    async createAppointment(req: Request, res: Response): Promise<Response> {
         try {
             const data = req.body
 
@@ -39,11 +39,11 @@ class CustomerController {
                 });
             }
 
-            await CustomerService.createCustomer(data);
+            await appointmentService.createAppointment(data);
 
             return res.status(201).json({
                 statusCode: 201,
-                message: "Cliente criado com sucesso"
+                message: "Horário agendado com sucesso"
             });
         } catch (error) {
             return res.status(500).json({
@@ -54,15 +54,15 @@ class CustomerController {
         }
     }
 
-    async findCustomerById(req: Request, res: Response): Promise<Response> {
+    async findAppointmentById(req: Request, res: Response): Promise<Response> {
         try {
             const { id } = req.params
             console.log(id)
-            const customer = await CustomerService.findCustomerById(id);
+            const customer = await appointmentService.findAppointmentById(id);
             console.log(customer)
             if (!customer) return res.status(404).json({
                 statusCode: 404,
-                message: "Cliente não encontrado",
+                message: "Horário não encontrado",
                 description: "Nenhum cliente foi encontrado com este id",
             });
             return res.status(200).json({
@@ -78,20 +78,20 @@ class CustomerController {
         }
     }
 
-    async updateCustomer(req: Request, res: Response): Promise<Response> {
+    async updateAppointment(req: Request, res: Response): Promise<Response> {
         try {
             const { id } = req.params
             const data = req.body;
-            const customer = await CustomerService.findCustomerById(id);
+            const customer = await appointmentService.findAppointmentById(id);
             if (!customer) return res.status(404).json({
                 statusCode: 404,
-                message: "Cliente não encontrado",
+                message: "Horário não encontrado",
                 description: "Nenhum cliente foi encontrado com este id",
             });
-            await CustomerService.updateCustomer(id, data);
+            await appointmentService.updateAppointment(id, data);
             return res.status(200).json({
                 statusCode: 200,
-                message: "Cliente atualizado com sucesso",
+                message: "Horário atualizado com sucesso",
             });
         } catch (error) {
             return res.status(500).json({
@@ -102,20 +102,20 @@ class CustomerController {
         }
     }
 
-    async deleteCustomer(req: Request, res: Response) {
+    async deleteAppointment(req: Request, res: Response) {
         try {
             const { id } = req.params
 
-            const customer = await CustomerService.findCustomerById(id);
+            const customer = await appointmentService.findAppointmentById(id);
             if (!customer) return res.status(404).json({
                 statusCode: 404,
-                message: "Cliente não encontrado",
+                message: "Horário não encontrado",
                 description: "Nenhum cliente foi encontrado com este id",
             });
-            await CustomerService.deleteCustomer(id);
+            await appointmentService.deleteAppointment(id);
             return res.status(200).json({
                 statusCode: 200,
-                message: "Cliente deletado com sucesso",
+                message: "Horário deletado com sucesso",
             });
         } catch (error) {
             return res.status(500).json({
@@ -127,4 +127,4 @@ class CustomerController {
     }
 }
 
-export default new CustomerController()
+export default new AppointmentController()
