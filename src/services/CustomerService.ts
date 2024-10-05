@@ -1,9 +1,14 @@
-import { Customer } from "../model/Customer";
+import { Customer } from "@prisma/client";
 import CustomerRepository from "../repositories/CustomerRepository";
 
 class CustomerService {
     async createCustomer(data: Omit<Customer, 'id' | 'createdAt' | 'updatedAt'>): Promise<Customer> {
-        return await CustomerRepository.create(data);
+        try {
+            return await CustomerRepository.create(data);
+        }
+        catch (err) {
+            console.error(err.message)
+        }
     }
 
     async findCustomerById(id: string): Promise<Customer | null> {
