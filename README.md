@@ -4,7 +4,7 @@
 
 Este projeto consiste no BackEnd do desafio da souv.
 
-Importante! : O vídeo de teste pode ser visualizado no pasta /teste
+Importante! : O vídeo de teste pode ser visualizado no pasta /teste ou através deste [link do drive](https://drive.google.com/drive/folders/1v0Qw7a4VeG85WHrJk26OwJONPgfcVEoZ?usp=sharing)
 
 ## Instalação e Execução do Projeto
 
