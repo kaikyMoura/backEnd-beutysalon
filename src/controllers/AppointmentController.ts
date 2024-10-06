@@ -31,11 +31,11 @@ class AppointmentController {
 
             console.log(data.appointments)
 
-            if (!data.name || !data.email || !data.phone) {
+            if (!data.name || !data.customerId || !data.employeeId) {
                 return res.status(400).json({
                     statusCode: 400,
                     message: "Faltam campos obrigatórios",
-                    description: "Os campos nome, email e telefone devem ser preenchidos corretamente",
+                    description: "Os campos nome e email devem ser preenchidos corretamente",
                 });
             }
 

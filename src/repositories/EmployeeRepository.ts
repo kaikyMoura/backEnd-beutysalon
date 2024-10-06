@@ -1,14 +1,25 @@
-import { Employee } from "@prisma/client";
+import { Appointment, Employee } from "@prisma/client";
 import { ICRUDRepositoryDao } from "../dao/ICRUDRepositoryDao";
 import prisma from "../dao/schemas/client";
 
 class EmployeeRepository implements ICRUDRepositoryDao<Employee> {
-    async create(data: Omit<Employee, 'id' | 'createdAt' | 'updatedAt' | 'appointments'>): Promise<Employee> {
+    async create(data: Omit<Employee, 'id' | 'createdAt' | 'updatedAt'> & { appointments?: Appointment[] }): Promise<Employee> {
         return await prisma.employee.create({
             data: {
                 ...data,
                 createdAt: new Date(),
-                updatedAt: new Date()
+                updatedAt: new Date(),
+                appointments: {
+                    create: data.appointments?.map(appointment => ({
+                        name: appointment.name,
+                        date: appointment.date,
+                        status: appointment.status,
+                        createdAt: appointment.createdAt ?? new Date(),
+                        updatedAt: appointment.updatedAt ?? new Date(),
+                        customerId: appointment.customerId,
+                        employeeId: appointment.employeeId,
+                    })) || [],
+                }
             }
         })
     }

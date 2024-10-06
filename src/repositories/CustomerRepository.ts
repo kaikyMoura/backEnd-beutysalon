@@ -3,7 +3,7 @@ import { ICRUDRepositoryDao } from "../dao/ICRUDRepositoryDao";
 import prisma from "../dao/schemas/client";
 
 class CustomerRepository implements ICRUDRepositoryDao<Customer> {
-    async create(data: Omit<Customer, 'id' | 'createdAt' | 'updatedAt' | 'appointments'> & { appointments?: Appointment[] }): Promise<Customer> {
+    async create(data: Omit<Customer, 'id' | 'createdAt' | 'updatedAt'> & { appointments?: Appointment[] }): Promise<Customer> {
         return await prisma.customer.create({
             data: {
                 ...data,
@@ -14,6 +14,9 @@ class CustomerRepository implements ICRUDRepositoryDao<Customer> {
                         name: appointment.name,
                         date: appointment.date,
                         status: appointment.status,
+                        createdAt: appointment.createdAt ?? new Date(),
+                        updatedAt: appointment.updatedAt ?? new Date(),
+                        employeeId: appointment.employeeId,
                     })) || [],
                 }
             }

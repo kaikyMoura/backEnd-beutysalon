@@ -8,9 +8,7 @@ class AppointmentRepository implements ICRUDRepositoryDao<Appointment> {
             data: {
                 ...data,
                 createdAt: new Date(),
-                updatedAt: new Date(),
-                customerId: data.customerId,
-                employeeId: data.employeeId
+                updatedAt: new Date()
             }
         })
     }
